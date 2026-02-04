@@ -18,7 +18,7 @@ class Employee(EmployeeBase):
 
 class AttendanceBase(BaseModel):
     date: date
-    status: str  # "Present" or "Absent"
+    status: str  
 
 class AttendanceCreate(AttendanceBase):
     pass

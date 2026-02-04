@@ -1,21 +1,22 @@
 from fastapi import FastAPI, Depends, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
-from .database import SessionLocal, init_db
-from .schemas import EmployeeCreate, Employee, AttendanceCreate, Attendance
-from .models import Employee as EmployeeModel
-from .crud import create_employee, get_employees, delete_employee, create_attendance, get_attendances
+
+from models import Employee as EmployeeModel
+from database import SessionLocal, init_db
+from schemas import EmployeeCreate, Employee, AttendanceCreate, Attendance
+from crud import create_employee, get_employees, delete_employee, create_attendance, get_attendances
 
 app = FastAPI()
-# Enable CORS so browser preflight (OPTIONS) requests are accepted
+
 app.add_middleware(
   CORSMiddleware,
-  allow_origins=["http://localhost:5173"],
+  allow_origins=["http://localhost:5173", "https://aniquesscorp.vercel.app/"],
   allow_credentials=True,
   allow_methods=["*"],
   allow_headers=["*"],
 )
-init_db()  # Create tables on startup
+init_db()  
 
 def get_db():
     db = SessionLocal()
@@ -43,7 +44,7 @@ def remove_employee(employee_id: int, db: Session = Depends(get_db)):
 
 @app.post("/employees/{employee_id}/attendance/", response_model=Attendance)
 def mark_attendance(employee_id: int, attendance: AttendanceCreate, db: Session = Depends(get_db)):
-    # Use the SQLAlchemy mapped `EmployeeModel` for DB queries (not the Pydantic `Employee` schema)
+   
     if not db.query(EmployeeModel).filter(EmployeeModel.id == employee_id).first():
         raise HTTPException(status_code=404, detail="Employee not found")
     return create_attendance(db, attendance, employee_id)
