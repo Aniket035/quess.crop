@@ -1,6 +1,5 @@
-# crud.py
 from sqlalchemy.orm import Session
-from models import Employee, Attendance   # plain imports
+from models import Employee, Attendance   
 from schemas import EmployeeCreate, AttendanceCreate
 
 def create_employee(db: Session, employee: EmployeeCreate):
