@@ -1,7 +1,6 @@
-
 fastapi
 uvicorn[standard]
 sqlalchemy
 pydantic
 email-validator
-psycopg2
+psycopg2-binary==2.9.9
