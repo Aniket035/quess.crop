@@ -2,7 +2,7 @@ from fastapi import FastAPI, Depends, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 
-from models import Employee as EmployeeModel
+from .models import Employee as EmployeeModel
 from database import SessionLocal, init_db
 from schemas import EmployeeCreate, Employee, AttendanceCreate, Attendance
 from crud import create_employee, get_employees, delete_employee, create_attendance, get_attendances
