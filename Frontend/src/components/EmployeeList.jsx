@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../api';
 import { Link } from 'react-router-dom';
 
 const EmployeeList = () => {
@@ -10,7 +10,7 @@ const EmployeeList = () => {
   useEffect(() => {
     const fetchEmployees = async () => {
       try {
-        const res = await axios.get('/employees/');
+        const res = await api.get('/employees/');
         setEmployees(res.data);
       } catch (err) {
         setError('Error fetching employees');
@@ -24,7 +24,7 @@ const EmployeeList = () => {
   const handleDelete = async (id) => {
     if (window.confirm('Delete employee?')) {
       try {
-        await axios.delete(`/employees/${id}`);
+        await api.delete(`/employees/${id}`);
         setEmployees(employees.filter(emp => emp.id !== id));
       } catch (err) {
         alert('Error deleting');

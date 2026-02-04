@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../api';
 import { useParams } from 'react-router-dom';
 
 const Attendance = () => {
@@ -12,7 +12,7 @@ const Attendance = () => {
   useEffect(() => {
     const fetchAttendance = async () => {
       try {
-        const res = await axios.get(`/employees/${id}/attendance/`);
+        const res = await api.get(`/employees/${id}/attendance/`);
         setAttendances(res.data);
       } catch (err) {
         setError('Error fetching attendance');
@@ -28,7 +28,7 @@ const Attendance = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(`/employees/${id}/attendance/`, formData);
+      const res = await api.post(`/employees/${id}/attendance/`, formData);
       setAttendances([...attendances, res.data]);
     } catch (err) {
       setError('Error marking attendance');

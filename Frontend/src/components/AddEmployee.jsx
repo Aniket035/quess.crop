@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import axios from 'axios';
+import api from '../api';
 import { useNavigate } from 'react-router-dom';
 
 const AddEmployee = () => {
@@ -14,7 +14,7 @@ const AddEmployee = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      await axios.post('/employees/', formData);
+      await api.post('/employees/', formData);
       navigate('/');
     } catch (err) {
       setError(err.response?.data?.detail || 'Error adding employee');
