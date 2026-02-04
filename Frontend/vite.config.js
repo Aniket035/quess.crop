@@ -7,7 +7,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/employees': {
-        target: 'http://127.0.0.1:8000',
+        target: 'https://quess-crop.onrender.com',
         changeOrigin: true,
         secure: false,
       },
