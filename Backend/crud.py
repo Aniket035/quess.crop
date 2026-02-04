@@ -1,6 +1,7 @@
+# crud.py
 from sqlalchemy.orm import Session
-from .models import Employee, Attendance
-from .schemas import EmployeeCreate, AttendanceCreate
+from models import Employee, Attendance   # plain imports
+from schemas import EmployeeCreate, AttendanceCreate
 
 def create_employee(db: Session, employee: EmployeeCreate):
     if db.query(Employee).filter(Employee.employee_id == employee.employee_id).first():

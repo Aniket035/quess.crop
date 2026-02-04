@@ -14,11 +14,11 @@ class Employee(EmployeeBase):
     id: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True   
 
 class AttendanceBase(BaseModel):
     date: date
-    status: str  
+    status: str 
 
 class AttendanceCreate(AttendanceBase):
     pass
@@ -28,4 +28,4 @@ class Attendance(AttendanceBase):
     employee_id: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True
